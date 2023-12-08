@@ -1,13 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// import { getUserInfo } from 'api/getUserInfo';
-// import { fetchBaseCurrencyThunk } from './operations';
-
-export const fetchBaseCurrency = createAsyncThunk(
-  'fetch/baseCurrency',
-  async (coords, { rejectWithValue }) => {
-    console.log('coords: ', coords);
-  }
-);
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchBaseCurrencyThunk } from './operations';
 
 const currencySlice = createSlice({
   name: 'currency',
@@ -16,7 +8,7 @@ const currencySlice = createSlice({
 
   reducers: {},
   extraReducers: build =>
-    build.addCase(fetchBaseCurrency.fulfilled, (state, action) => {
+    build.addCase(fetchBaseCurrencyThunk.fulfilled, (state, action) => {
       state.baseCurrency = action.payload;
     }),
 });

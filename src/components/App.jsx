@@ -2,7 +2,7 @@ import { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
 import { useDispatch } from 'react-redux';
-import { fetchBaseCurrency } from 'redux/currencySlice';
+import { fetchBaseCurrencyThunk } from '../redux/operations';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const RatesPage = lazy(() => import('pages/RatesPage'));
@@ -15,8 +15,7 @@ export const App = () => {
     };
 
     function success(pos) {
-      console.log(pos.coords);
-      dispatch(fetchBaseCurrency(pos.coords));
+      dispatch(fetchBaseCurrencyThunk(pos.coords));
     }
 
     function error(err) {
