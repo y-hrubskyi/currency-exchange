@@ -1,7 +1,8 @@
+import FormCurrency from 'components/FormCurrency/FormCurrency';
 import React from 'react';
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return <FormCurrency />;
 };
 
 export default HomePage;

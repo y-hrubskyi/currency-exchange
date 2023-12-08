@@ -38,3 +38,8 @@ export const App = () => {
     </Routes>
   );
 };
+
+// fetch(
+//   'https://api.apilayer.com/exchangerates_data/latest?symbols=usd,jpy&base=uah',
+//   requestOptions,
+// );
