@@ -3,13 +3,20 @@ import { getUserInfo } from 'api/getUserInfo';
 
 export const fetchBaseCurrencyThunk = createAsyncThunk(
   'fetch/baseCurrency',
-  async (coords, { rejectWithValue }) => {
+  async (coords, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedCurrency = state.currency.baseCurrency;
+
+    if (persistedCurrency) {
+      return thunkAPI.rejectWithValue('Base currency is already exist');
+    }
+
     try {
       const data = await getUserInfo(coords);
 
       return data.results[0].annotations.currency.iso_code;
     } catch (err) {
-      return rejectWithValue(err.data);
+      return thunkAPI.rejectWithValue(err.data);
     }
   }
 );
