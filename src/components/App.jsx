@@ -1,19 +1,22 @@
 import { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
-import { getUserInfo } from 'api/getUserInfo';
+import { useDispatch } from 'react-redux';
+import { fetchBaseCurrency } from 'redux/currencySlice';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const RatesPage = lazy(() => import('pages/RatesPage'));
 
 export const App = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
     const options = {
       enableHighAccuracy: true,
     };
 
     function success(pos) {
-      getUserInfo(pos.coords);
+      console.log(pos.coords);
+      dispatch(fetchBaseCurrency(pos.coords));
     }
 
     function error(err) {
@@ -21,7 +24,7 @@ export const App = () => {
     }
 
     navigator.geolocation.getCurrentPosition(success, error, options);
-  }, []);
+  }, [dispatch]);
 
   return (
     <Routes>
